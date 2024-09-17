@@ -1,0 +1,47 @@
+conky.config = {
+    -- Conky configuration settings
+    alignment = 'top_middle',
+    gap_x = -30,
+    gap_y = 250,
+    maximum_width = 640,  -- Increased width
+    minimum_height = 550,
+    minimum_width = 640,  -- Increased width
+
+    -- Text and color settings
+    use_xft = true,
+    font = 'Feena Casual:size=10',
+    override_utf8_locale = true,
+    default_color = '162635',
+    default_shade_color = '112422',
+    draw_shades = false,
+    draw_outline = false,
+    draw_borders = false,
+    draw_graph_borders = false,
+
+    -- Window settings
+    own_window = true,
+    own_window_type = 'desktop',
+    own_window_transparent = true,
+    own_window_colour = '000000',
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    own_window_argb_visual = true,
+    own_window_argb_value = 0,
+
+    -- Lua settings
+    lua_load = '~/Downloads/conky_themes/day_format.lua',
+    
+    -- General settings
+    double_buffer = true,
+    no_buffers = true,
+    update_interval = 1,
+}
+
+conky.text = [[
+${font SweetHipster-PzlE:size=200}${color 162635}${lua conky_format_day}#${color yellow}
+
+${color #ffffff}${voffset -150}${offset 150}${font PoiretOne-Regular:size=15} ${time %B %d %Y}
+
+${color #ffffff}${voffset -20}${offset 180}${font PoiretOne-Regular:pixelsize=20}${time - %I:%M %p -}
+]]
+
+

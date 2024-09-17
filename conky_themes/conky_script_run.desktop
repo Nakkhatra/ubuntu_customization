@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Exec=scripts.sh
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name=Conky Widgets
+Comment=Start Conky widgets at login
