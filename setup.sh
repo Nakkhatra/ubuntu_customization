@@ -54,6 +54,8 @@ for ext_name in "${extensions[@]}"; do
     install_extension "$ext_name"
 done
 
+# Navigate back to the main directory
+cd ..
 
 
 # Install orchis dark compact theme
@@ -69,14 +71,14 @@ rm -rf Orchis-theme
 
 # Install shell theme whitesur-dark. Provided the theme as I replaced the activities icon with ubuntu activites.svg
 mkdir -p $HOME/.themes
-unzip themes/WhiteSur-dark-linux-activity.zip $HOME/.themes/
+unzip -o themes/WhiteSur-dark-linux-activity.zip -d $HOME/.themes/
 
 
 
 
 # Install icons (Tela nord dark)
 mkdir -p $HOME/.icons
-unzip icons/Tela-nord-dark.zip $HOME/.icons/
+unzip -o icons/Tela-nord-dark.zip -d $HOME/.icons/
 
 
 
