@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define a list of packages and extensions to install
-PACKAGES="gnome-tweaks gettext conky-all lua5.3 unzip"
+PACKAGES="gnome-tweaks gettext conky-all lua5.3 unzip make build-essential"
 
 
 
