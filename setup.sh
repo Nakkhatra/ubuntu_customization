@@ -26,7 +26,7 @@ install_extension() {
     local ext_name="$1@gnome-shell-extensions.gcampax.github.com"
     local ext_dir="extensions/$1"
 
-    echo "Installing extension: $ext_name"
+    echo "Installing gnome shell extension: $ext_name"
     
     # Create the directory for the extension
     mkdir -p ~/.local/share/gnome-shell/extensions/${ext_name}/
@@ -59,6 +59,7 @@ cd ..
 
 
 # Install orchis dark compact theme
+echo "Installing orchis dark compact. . ."
 git clone https://github.com/vinceliuice/Orchis-theme.git
 cd Orchis-theme
 ./install.sh --color dark
@@ -70,27 +71,30 @@ rm -rf Orchis-theme
 
 
 # Install shell theme whitesur-dark. Provided the theme as I replaced the activities icon with ubuntu activites.svg
+echo "Installing whitesurrchis dark custom. . ."
 mkdir -p $HOME/.themes
-unzip -o themes/WhiteSur-dark-linux-activity.zip -d $HOME/.themes/
+unzip -o themes/WhiteSur-dark-linux-activity.zip -d $HOME/.themes/ >/dev/null
 
 
 
 
 # Install icons (Tela nord dark)
+echo "Installing icons. . . ."
 mkdir -p $HOME/.icons
-unzip -o icons/Tela-nord-dark.zip -d $HOME/.icons/
+unzip -o icons/Tela-nord-dark.zip -d $HOME/.icons/ >/dev/null
 
 
 
 
 # Install fonts for conky
+echo "Installing fonts. . . ."
 mkdir -p $HOME/.fonts
-cp -r fonts/* $HOME/.fonts/
+cp -r fonts/* $HOME/.fonts/ >/dev/null
 
 
 
 
-# Convert time and language to English first for the fonts to work properly
+echo "Converting time and language to English first for the fonts to work properly. . . ."
 sudo sed -i -e 's/^LANG=.*/LANG=en_US.UTF-8/' \
             -e 's/^LC_TIME=.*/LC_TIME=en_US.UTF-8/' \
             /etc/default/locale
@@ -98,7 +102,7 @@ sudo sed -i -e 's/^LANG=.*/LANG=en_US.UTF-8/' \
 
 
 
-# Setup conky script to start on startup
+echo "Setup conky script to start on startup. . . ."
 cd conky_themes
 
 # Get the current directory
@@ -116,11 +120,3 @@ sed -i "s|Exec=scripts.sh|Exec=$CURRENT_DIR/scripts.sh|g" "$DESKTOP_FILE"
 
 # Make the desktop file executable
 chmod +x ~/.config/autostart/conky_script_run.desktop
-
-
-
-
-
-
-
-
