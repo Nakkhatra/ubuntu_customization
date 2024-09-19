@@ -14,7 +14,6 @@ sudo apt update && sudo apt upgrade && sudo apt install -y $PACKAGES
 
 # Dash to Dock
 chmod +x setup_dash_to_dock.sh
-export SASS=dart
 ./setup_dash_to_dock.sh
 
 
