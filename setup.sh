@@ -121,3 +121,6 @@ sed -i "s|Exec=scripts.sh|Exec=$CURRENT_DIR/scripts.sh|g" "$DESKTOP_FILE"
 
 # Make the desktop file executable
 chmod +x ~/.config/autostart/conky_script_run.desktop
+
+echo "Updating wallpaper. . . ."
+gsettings set org.gnome.desktop.background picture-uri file://wallpapers/minimalist-nature-forest-mountains-digital-art-uhdpaper.com-hd-36.jpg
