@@ -1,14 +1,6 @@
 #!/bin/bash
 
 git clone https://github.com/micheleg/dash-to-dock.git
-
-# Check if the destination directory already exists
-if [ -d "dash-to-dock" ]; then
-    echo "Directory dash-to-dock already exists. Deleting and reinstalling now..."
-    rm -rf "dash-to-dock"
-    echo "Directory deleted."
-fi
-
 make -C dash-to-dock install
 
 # Update dash-to-dock settings using dconf
