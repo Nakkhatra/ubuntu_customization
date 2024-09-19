@@ -13,7 +13,8 @@ sudo apt update && sudo apt upgrade && sudo apt install -y $PACKAGES
 
 
 # Dash to Dock
-./setup_dash_to_dock
+chmod +x setup_dash_to_dock.sh
+./setup_dash_to_dock.sh
 
 
 
