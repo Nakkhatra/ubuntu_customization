@@ -69,14 +69,14 @@ rm -rf Orchis-theme
 
 # Install shell theme whitesur-dark. Provided the theme as I replaced the activities icon with ubuntu activites.svg
 mkdir -p $HOME/.themes
-unzip WhiteSur-dark-linux-activity.zip $HOME/.themes/
+unzip themes/WhiteSur-dark-linux-activity.zip $HOME/.themes/
 
 
 
 
 # Install icons (Tela nord dark)
 mkdir -p $HOME/.icons
-unzip Tela-nord-dark.zip $HOME/.icons/
+unzip icons/Tela-nord-dark.zip $HOME/.icons/
 
 
 
