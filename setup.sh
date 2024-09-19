@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define a list of packages and extensions to install
-PACKAGES="gnome-tweaks gettext conky-all lua5.3 unzip make build-essential"
+PACKAGES="gnome-tweaks gettext conky-all lua5.3 unzip make build-essential nodejs npm sass"
 
 
 
@@ -14,6 +14,7 @@ sudo apt update && sudo apt upgrade && sudo apt install -y $PACKAGES
 
 # Dash to Dock
 chmod +x setup_dash_to_dock.sh
+export SASS=dart
 ./setup_dash_to_dock.sh
 
 

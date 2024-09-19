@@ -1,8 +1,6 @@
 #!/bin/bash
 
 git clone https://github.com/micheleg/dash-to-dock.git
-export SASS=dart
-cd dash-to-dock
 make -C dash-to-dock install
 
 # Update dash-to-dock settings using dconf
