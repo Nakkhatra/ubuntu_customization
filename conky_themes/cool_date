@@ -1,7 +1,7 @@
 conky.config = {
     -- Conky configuration settings
     alignment = 'top_middle',
-    gap_x = -30,
+    gap_x = 0,
     gap_y = 250,
     maximum_width = 640,  -- Increased width
     minimum_height = 550,
