@@ -124,3 +124,8 @@ chmod +x ~/.config/autostart/conky_script_run.desktop
 
 echo "Updating wallpaper. . . ."
 gsettings set org.gnome.desktop.background picture-uri file://wallpapers/minimalist-nature-forest-mountains-digital-art-uhdpaper.com-hd-36.jpg
+
+# Update grub theme
+git clone https://github.com/vinceliuice/grub2-themes.git
+sudo grub2-themes/install.sh -t vimix -c 1920x1080 -i white
+rm -rf grub2-themes
