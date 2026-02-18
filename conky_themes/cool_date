@@ -28,7 +28,7 @@ conky.config = {
     own_window_argb_value = 0,
 
     -- Lua settings
-    lua_load = '~/Downloads/conky_themes/day_format.lua',
+    lua_load = 'PLACEHOLDER/day_format.lua',  -- replaced by setup.sh at install time
     
     -- General settings
     double_buffer = true,
@@ -39,9 +39,10 @@ conky.config = {
 conky.text = [[
 ${font SweetHipster-PzlE:size=200}${color 162635}${lua conky_format_day}#${color yellow}
 
-${color #ffffff}${voffset -150}${offset 150}${font PoiretOne-Regular:size=15} ${time %B %d %Y}
+${color #ffffff}${voffset -150}${alignc}${font PoiretOne-Regular:size=15}${time %B %d %Y}
 
-${color #ffffff}${voffset -20}${offset 180}${font PoiretOne-Regular:pixelsize=20}${time - %I:%M %p -}
+${color #ffffff}${voffset -20}${alignc}${font PoiretOne-Regular:pixelsize=20}${time - %I:%M %p -}
 ]]
+
 
 

@@ -1,14 +1,15 @@
 #!/bin/bash
 
-# Define a list of packages and extensions to install
-PACKAGES="gnome-tweaks gettext conky-all lua5.3 unzip make build-essential nodejs npm sass"
+set -e
 
+# Define a list of packages and extensions to install
+PACKAGES="gnome-tweaks gettext conky-all lua5.3 unzip make build-essential nodejs npm sass lm-sensors"
 
 
 
 # Update and install all packages in one line
 echo "Updating package list and installing required packages..."
-sudo apt update && sudo apt upgrade && sudo apt install -y $PACKAGES
+sudo apt update && sudo apt upgrade -y && sudo apt install -y $PACKAGES
 
 
 
@@ -22,27 +23,25 @@ chmod +x setup_dash_to_dock.sh
 # Define an array of extension names
 extensions=("user-theme" "apps-menu")
 
-# Function to install and enable an extension
+# Function to copy extension files (no GNOME Shell restart per extension)
 install_extension() {
     local ext_name="$1@gnome-shell-extensions.gcampax.github.com"
     local ext_dir="extensions/$1"
 
     echo "Installing gnome shell extension: $ext_name"
-    
+
     # Create the directory for the extension
     mkdir -p ~/.local/share/gnome-shell/extensions/${ext_name}/
-    
+
     # Copy the extension files
     cp -r ${ext_dir}/* ~/.local/share/gnome-shell/extensions/${ext_name}/
-    
-    # Reload GNOME Shell
-    echo "Reloading GNOME Shell..."
-    gnome-shell --replace &
-    sleep 5  # Wait for GNOME Shell to reload
+}
 
+# Function to enable an extension (called after GNOME Shell is reloaded)
+enable_extension() {
+    local ext_name="$1@gnome-shell-extensions.gcampax.github.com"
     echo "Enabling extension: $ext_name"
-    # Enable the extension
-    gnome-extensions enable ${ext_name}         # ${ext_name} the variable is mentioned this way when it is a string containing complex characters like directory name containing '/' or etc
+    gnome-extensions enable ${ext_name}
 }
 
 # Clone the repository
@@ -50,13 +49,24 @@ echo "Cloning GNOME Shell Extensions repository..."
 git clone https://gitlab.gnome.org/GNOME/gnome-shell-extensions.git
 cd gnome-shell-extensions
 
-# Install and enable each extension
+# Copy all extension files first
 for ext_name in "${extensions[@]}"; do
     install_extension "$ext_name"
 done
 
-# Navigate back to the main directory
+# Navigate back to the main directory and clean up
 cd ..
+rm -rf gnome-shell-extensions
+
+# Reload GNOME Shell once after all extensions are copied
+echo "Reloading GNOME Shell..."
+gnome-shell --replace &
+sleep 5  # Wait for GNOME Shell to reload
+
+# Enable all extensions
+for ext_name in "${extensions[@]}"; do
+    enable_extension "$ext_name"
+done
 
 
 # Install orchis dark compact theme
@@ -66,7 +76,7 @@ cd Orchis-theme
 ./install.sh --color dark
 cd ..
 # Clean up
-rm -rf Orchis-theme 
+rm -rf Orchis-theme
 
 
 
@@ -103,6 +113,9 @@ sudo sed -i -e 's/^LANG=.*/LANG=en_US.UTF-8/' \
 
 
 
+# Store the project root before changing directories
+PROJECT_ROOT=$(pwd)
+
 echo "Setup conky script to start on startup. . . ."
 cd conky_themes
 
@@ -119,11 +132,16 @@ cp conky_script_run.desktop "$DESKTOP_FILE"
 # Modify the .desktop file to replace the placeholder with the current directory
 sed -i "s|Exec=scripts.sh|Exec=$CURRENT_DIR/scripts.sh|g" "$DESKTOP_FILE"
 
+# Fix the lua_load path in cool_date to use the absolute path of this directory
+sed -i "s|lua_load = '.*day_format.lua'|lua_load = '$CURRENT_DIR/day_format.lua'|g" cool_date
+
 # Make the desktop file executable
 chmod +x ~/.config/autostart/conky_script_run.desktop
 
+cd ..
+
 echo "Updating wallpaper. . . ."
-gsettings set org.gnome.desktop.background picture-uri file://wallpapers/minimalist-nature-forest-mountains-digital-art-uhdpaper.com-hd-36.jpg
+gsettings set org.gnome.desktop.background picture-uri "file://$PROJECT_ROOT/wallpapers/minimalist-nature-forest-mountains-digital-art-uhdpaper.com-hd-36.jpg"
 
 # Update grub theme
 git clone https://github.com/vinceliuice/grub2-themes.git

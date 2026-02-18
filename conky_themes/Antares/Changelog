@@ -1,0 +1,54 @@
+Changelog
+------------------------------
+Antares - Conky Theme
+[ Scorpio Themes Pack ] 
+
+by Closebox73
+
+Social
+X			: https://twitter.com/closebox73
+Discord		: https://discord.com/users/1115644269802311750
+Github		: https://github.com/closebox73
+Pling		: https://pling.com/u/closebox73x
+Mastodon	: https://mastodon.social/@closebox73
+------------------------------
+
+v3.1
+date : 28 Apr 2024
+-	Add line draw_blended in conky config due transparent image issue in Gnome & KDE
+-	New weather-icon-text.sh
+-	Add Donation link
+-	Some minor change
+
+
+v2.8
+date : 22 Feb 2023
+-	Add License
+-	Add Changelog file
+-	A few changes to the script
+-	Add Fahrenheit Variant
+-	New Weather.sh
+-	New version Change-color.sh
+
+
+v2.2
+date : 04 Dec 2022
+-	Add override_utf8_locale line
+
+
+v2.1
+date : 30 Sep 2022
+-	Add override_utf8_locale line
+-	A few changes to the script
+-	Minimize archive size
+
+
+v2.0
+date : 26 Jul 2022
+-	Add Script to change 
+-	A few changes to the script
+
+
+v1.0
+date : 26 Mar 2021
+-	Initial release

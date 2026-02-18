@@ -2,6 +2,7 @@
 
 git clone https://github.com/micheleg/dash-to-dock.git
 make -C dash-to-dock install
+rm -rf dash-to-dock
 
 # Update dash-to-dock settings using dconf
 # Define the base path

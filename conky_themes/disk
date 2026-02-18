@@ -23,7 +23,7 @@ maximum_width 150
 
 # — ALIGNMENT — #
 alignment top_right
-gap_x 650
+gap_x 700
 gap_y 900
 
 # — GRAPHIC — #
@@ -54,4 +54,4 @@ TEXT
 ${voffset -3}${font Orore:size=20}Q${voffset -10}${goto 36}${font}${font Laconic:size=11:condensed:bold}Root${font}${goto 70}${voffset -10}${font Orore:size=20}Q${voffset -10}${font}${goto 100}${font Laconic:size=11:condensed:bold} Home${font}
 ${offset 2}${voffset 2}${fs_bar 3,23 /}${goto 28}${voffset -5}${font Sportrop:size=9:condensed:bold}$color1 ${fs_used_perc /}%$color${goto 70}${offset 2}${voffset 2}${fs_bar 3,23 /home}${goto 96}${voffset -2}$color1 ${fs_used_perc /home}%$color${font}
 ${offset 2}${voffset 1}I/O${goto 38}»${goto 52}${color1}${diskio}${color}${alignr 5}${diskiograph 8,30}
-Temp${goto 38}»${goto 52}${color1}${hddtemp /dev/sda} °C 
+Temp${goto 38}»${goto 52}${color1}${execi 6 sensors | grep 'Composite' | awk 'NR==1 {print $2}' | cut -c2-5}${color} °C 

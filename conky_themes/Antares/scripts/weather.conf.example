@@ -1,0 +1,15 @@
+# Weather configuration for Antares conky theme
+# Copy this file to weather.conf and fill in your own values.
+# weather.conf is gitignored so your API key won't be committed.
+
+# Get your city ID at https://openweathermap.org/find
+city_id=2950159
+
+# Get a free API key at https://openweathermap.org/api
+api_key=YOUR_API_KEY_HERE
+
+# metric = Celsius, imperial = Fahrenheit
+unit=metric
+
+# Language code (en, de, fr, etc.)
+lang=en

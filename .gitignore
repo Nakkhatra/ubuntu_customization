@@ -1,0 +1,11 @@
+# Temp directories cloned during setup
+gnome-shell-extensions/
+Orchis-theme/
+grub2-themes/
+dash-to-dock/
+
+# Weather API credentials — copy weather.conf.example to weather.conf and fill in your values
+conky_themes/Antares/scripts/weather.conf
+
+.specstory/
+.cursorindexingignore
