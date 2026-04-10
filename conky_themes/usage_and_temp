@@ -61,9 +61,9 @@ ${goto 0}${color2}${hr 1}${color}${voffset 0}
 
 # System Info
 ${font Laconic:size=10}CPU Usage: ${font Laconic:size=10:weight=bold}${color1}${cpu}%${color}
-${font Laconic:size=10}CPU Temp: ${font Laconic:size=10:weight=bold}${color1}${execi 6 sensors | grep 'Tctl:' | awk '{print $2}' | cut -c2-5}${color}°C
-${font Laconic:size=10}GPU Usage: ${font Laconic:size=10:weight=bold}${color1}${execi 6 nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits 2>/dev/null || echo "N/A"}${color}%
-${font Laconic:size=10}GPU Temp: ${font Laconic:size=10:weight=bold}${color1}${execi 6 nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader 2>/dev/null || echo "N/A"}${color}°C
+${font Laconic:size=10}CPU Temp: ${font Laconic:size=10:weight=bold}${color1}${execi 6 sensors 2>/dev/null | grep -m1 'Tctl:\|Tdie:\|Package id 0:\|Core 0:' | awk '{print $2}' | tr -d '+°C' || echo "N/A"}${color}°C
+${if_existing /usr/bin/nvidia-smi}${font Laconic:size=10}GPU Usage: ${font Laconic:size=10:weight=bold}${color1}${execi 6 nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits 2>/dev/null}${color}%
+${font Laconic:size=10}GPU Temp: ${font Laconic:size=10:weight=bold}${color1}${execi 6 nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader 2>/dev/null}${color}°C${endif}
 ${font Laconic:size=10}${execi 6 sensors | grep -m 1 'nvme' | cut -d' ' -f1} Temp: ${font Laconic:size=10}${color1}${execi 6 sensors | grep 'Composite' | awk 'NR==1 {print $2}' | cut -c2-5}${color}°C
 ${font Laconic:size=10}${execi 6 sensors | grep -m 2 'nvme' | tail -n 1 | cut -d' ' -f1} Temp: ${font Laconic:size=10}${color1}${execi 6 sensors | grep 'Composite' | awk 'NR==2 {print $2}' | cut -c2-5}${color}°C
 

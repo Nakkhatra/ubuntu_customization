@@ -1,209 +1,138 @@
-# Ubuntu 20.04 Desktop Customization Script
+# Ubuntu Desktop Customization
 
-A one-click solution for customizing Ubuntu 20.04 with a sleek, dark-themed Dash-to-Dock setup.
+A one-click setup script that transforms your Ubuntu GNOME desktop with a dark-themed Dash-to-Dock, system monitoring widgets, custom themes, icons, fonts, and a GRUB boot screen theme.
 
-## 🚀 Quick Start
+## What This Installs
 
-```bash
-# Clone or download the script
-wget https://your-repo-url/dash-to-dock-setup.sh
+- **Dash-to-Dock** — Bottom-positioned dock with dark blue background, transparency, and smart behavior
+- **GNOME Shell Extensions** — User Theme and Apps Menu
+- **GTK Themes** — Orchis Dark Compact + WhiteSur Dark (with custom Ubuntu activities icon)
+- **Icon Pack** — Tela Nord Dark
+- **Conky Widgets** — 5 system monitoring widgets (CPU/GPU usage & temps, disk, memory, processes, date/time)
+- **Antares Conky Theme** — Alternative widget theme with weather, ring gauges, and time in words (optional)
+- **Custom Fonts** — Feather, Feena Casual, Laconic, Poiret One, Sweet Hipster
+- **Wallpaper** — Minimalist nature forest/mountains
+- **GRUB Theme** — Vimix dark boot screen
 
-# Make executable and run
-chmod +x dash-to-dock-setup.sh
-./dash-to-dock-setup.sh
-```
+## Requirements
 
-## 📋 What This Script Does
+- **OS:** Ubuntu with GNOME desktop (tested on 20.04 LTS)
+- **Display Server:** X11 recommended (Wayland has limited support)
+- **Permissions:** Regular user account (the script uses `sudo` for package installation, locale, and GRUB)
+- **Internet:** Required for downloading extensions and themes during setup
 
-This script transforms your default Ubuntu 20.04 desktop by:
-
-✅ Installs Dash-to-Dock - Modern dock replacement for Ubuntu default sidebar
-✅ Applies Dark Theme - Beautiful dark blue (#090f25) background with transparency
-✅ Optimizes Layout - Bottom-positioned dock with smart sizing and behavior
-✅ Configures Behavior - Sets up click actions, indicators, and animations
-✅ Single Command Setup - Everything configured automatically
-
-## 🎨 Preview
-
-Before: Default Ubuntu 20.04 with left sidebar After: Sleek bottom dock with dark theme and transparency
-
-### Key Visual Features
-
-🌙 Dark Theme: Deep blue background with 50% transparency
-📍 Bottom Dock: Clean bottom positioning like macOS
-🔍 Smart Previews: Click to minimize or show window previews
-⚡ Dynamic Sizing: Icons adapt based on content
-🎯 Running Indicators: Dash-style indicators for active apps
-
-## 🛠️ Requirements
-
-- OS: Ubuntu 20.04 LTS (GNOME Desktop)
-- Dependencies: Git, Make, dconf (usually pre-installed)
-- Permissions: User-level installation (no sudo required)
-
-## 📦 Installation
-
-### Method 1: Direct Download & Run
+## Installation
 
 ```bash
-wget https://raw.githubusercontent.com/your-username/your-repo/main/dash-to-dock-setup.sh
-chmod +x dash-to-dock-setup.sh
-./dash-to-dock-setup.sh
+git clone https://github.com/Nakkhatra/ubuntu_customization.git
+cd ubuntu_customization
+chmod +x setup.sh
+./setup.sh
 ```
 
-### Method 2: Clone Repository
+The script presents an interactive menu:
 
-```bash
-git clone https://github.com/your-username/ubuntu-customization.git
-cd ubuntu-customization
-chmod +x dash-to-dock-setup.sh
-./dash-to-dock-setup.sh
+```
+1) Install everything
+2) Dash-to-Dock only
+3) GNOME extensions only
+4) Themes & icons only
+5) Conky widgets only
+6) Wallpaper only
+7) GRUB theme only
+8) Fonts only
+0) Exit
 ```
 
-### Method 3: One-liner
+For non-interactive full install: `./setup.sh --all`
 
-```bash
-curl -sSL https://raw.githubusercontent.com/your-username/your-repo/main/dash-to-dock-setup.sh | bash
-```
+## Conky Themes
 
-## ⚙️ Configuration Details
+During setup, you can choose between two Conky themes:
 
-| Feature | Setting | Value |
-|---------|---------|-------|
-| Position | Bottom dock | BOTTOM |
-| Background | Dark blue with transparency | #090f25 @ 50% |
-| Icon Size | Dynamic, max 42px | 42px |
-| Click Action | Minimize or show previews | Smart behavior |
-| Indicators | Dash style for running apps | DASHES |
-| Auto-hide | Dynamic show/hide | Enabled |
+**Default Widgets** — 5 individual monitoring widgets positioned across the desktop:
+- Usage & Temperature (CPU/GPU usage, temps for CPU, GPU, NVMe drives)
+- Disk (root/home usage, I/O rate)
+- Memory (RAM/SWAP usage)
+- Processes (top 4 by CPU)
+- Date/Time (decorative large format)
 
-## 🔧 Customization
+**Antares Theme** — An alternative all-in-one widget with:
+- Weather display (requires free OpenWeatherMap API key)
+- Ring gauge indicators for CPU, memory, disk
+- Time displayed in words
+- Customizable accent color via `conky_themes/Antares/change-color.sh`
+
+Widget positions scale automatically based on your screen resolution.
+
+## Dock Configuration
+
+| Setting | Value |
+|---------|-------|
+| Position | Bottom |
+| Background | #090f25 at 50% opacity |
+| Icon Size | Dynamic, max 42px |
+| Click Action | Minimize or show previews |
+| Indicators | Dashes |
+| Auto-hide | Enabled (dynamic) |
 
 ### Quick Tweaks
 
-Change dock position to left:
-
 ```bash
+# Change dock position
 dconf write /org/gnome/shell/extensions/dash-to-dock/dock-position "'LEFT'"
-```
 
-Make background fully opaque:
-
-```bash
+# Change background opacity
 dconf write /org/gnome/shell/extensions/dash-to-dock/background-opacity 1.0
-```
 
-Increase icon size:
-
-```bash
+# Change icon size
 dconf write /org/gnome/shell/extensions/dash-to-dock/dash-max-icon-size 64
 ```
 
-### Full Reset
+## Uninstall
 
 ```bash
-dconf reset -f /org/gnome/shell/extensions/dash-to-dock/
+chmod +x uninstall.sh
+./uninstall.sh
 ```
 
-## 🐛 Troubleshooting
+The uninstall script will:
+- Stop Conky and remove autostart entry
+- Disable and remove GNOME extensions
+- Reset Dash-to-Dock settings
+- Remove installed themes and icons
+- Optionally restore your previous configs from backup
+- Optionally remove the GRUB theme
 
-### Extension does not appear after installation
+## Backups
 
-```bash
-# Restart GNOME Shell
-Alt + F2 → type 'r' → Enter
-# Or logout/login
-```
+Every time `setup.sh` runs, it backs up your existing configs to `~/.ubuntu_customization_backup_<timestamp>/` before making changes. This includes your themes, icons, fonts, locale settings, Dash-to-Dock config, and Conky autostart entry.
 
-### Build errors during installation
+## Troubleshooting
 
-```bash
-# Install build dependencies
-sudo apt update
-sudo apt install make gettext git
-```
+**Extensions don't appear after install:**
+Log out and back in, or press Alt+F2 and type `r` (X11 only).
 
-### Settings not applied
+**Conky widgets positioned incorrectly:**
+Widget positions auto-scale based on screen resolution. If positioning is off, the baseline is 1920x1080 — edit `gap_x`/`gap_y` values in the conky config files under `conky_themes/`.
 
-```bash
-# Check if dconf is working
-dconf list /org/gnome/shell/extensions/dash-to-dock/
+**CPU temperature shows blank:**
+The script auto-detects AMD (Tctl/Tdie) and Intel (Package id 0/Core 0) sensors. Ensure `lm-sensors` is running: `sudo sensors-detect` then `sensors` to verify.
 
-# Force restart desktop session
-sudo systemctl restart gdm3
-```
+**GPU rows not showing:**
+GPU monitoring only appears when an NVIDIA GPU with `nvidia-smi` is detected. This is intentional — no "N/A" clutter on non-NVIDIA systems.
 
-### Extension shows but does not work
+## License
 
-```bash
-# Check GNOME Shell version compatibility
-gnome-shell --version
+This project is licensed under the MIT License.
 
-# Reinstall extension
-rm -rf ~/.local/share/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com
-./dash-to-dock-setup.sh
-```
+The Dash-to-Dock extension is licensed under GPL v2+. The Antares Conky theme is licensed under GPL v3.
 
-## 🗑️ Uninstallation
+## Credits
 
-### Quick Removal
-
-```bash
-# Disable extension
-gnome-extensions disable dash-to-dock@micxgx.gmail.com
-
-# Remove files
-rm -rf ~/.local/share/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com
-
-# Reset settings (optional)
-dconf reset -f /org/gnome/shell/extensions/dash-to-dock/
-```
-
-### Complete Cleanup
-
-```bash
-# Remove all traces
-rm -rf ~/.local/share/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com
-rm -rf ~/dash-to-dock
-dconf reset -f /org/gnome/shell/extensions/dash-to-dock/
-```
-
-## 🤝 Contributing
-
-Found a bug or want to improve the script? Contributions welcome!
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/improvement`)
-3. Commit your changes (`git commit -am 'Add some improvement'`)
-4. Push to the branch (`git push origin feature/improvement`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-The Dash-to-Dock extension itself is licensed under GPL v2+.
-
-## 🙏 Credits
-
-- Dash-to-Dock by Michele G - The amazing GNOME extension
-- Ubuntu Team - For the solid foundation
-- GNOME Project - For the desktop environment
-
-## 📊 Compatibility
-
-| Ubuntu Version | Status | Notes |
-|----------------|--------|-------|
-| 20.04 LTS | ✅ Tested | Primary target |
-| 18.04 LTS | ⚠️ Partial | May work with older GNOME |
-| 22.04 LTS | 🔄 Testing | Should work, testing in progress |
-
-## 🆘 Support
-
-- Issues: GitHub Issues
-- Discussions: GitHub Discussions
-- Ubuntu Forums: Ask Ubuntu
-
-⭐ If this script helped you, please star the repository!
-
-Made with ❤️ for the Ubuntu community
+- [Dash-to-Dock](https://github.com/micheleg/dash-to-dock) by Michele G
+- [Orchis Theme](https://github.com/vinceliuice/Orchis-theme) by vinceliuice
+- [Tela Icon Theme](https://github.com/vinceliuice/Tela-icon-theme) by vinceliuice
+- [GRUB2 Themes](https://github.com/vinceliuice/grub2-themes) by vinceliuice
+- [Antares Conky](https://www.pling.com/p/1462012/) by Closebox73
+- GNOME Project and Ubuntu Team
