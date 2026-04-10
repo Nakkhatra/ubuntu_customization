@@ -1,5 +1,6 @@
 #!/bin/bash
 
+rm -rf dash-to-dock
 git clone https://github.com/micheleg/dash-to-dock.git
 make -C dash-to-dock install
 rm -rf dash-to-dock

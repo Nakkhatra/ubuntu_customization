@@ -66,8 +66,9 @@ install_packages() {
     local packages="gnome-tweaks gettext conky-all lua5.3 unzip make build-essential nodejs npm sass lm-sensors"
 
     echo "Updating package list and installing required packages..."
+    sudo apt update
     # shellcheck disable=SC2086 -- intentional word splitting for package list
-    sudo apt update && sudo apt upgrade -y && sudo apt install -y $packages
+    sudo apt install -y $packages
 }
 
 # ============================================================
@@ -101,6 +102,7 @@ install_extensions() {
     }
 
     echo "Cloning GNOME Shell Extensions repository..."
+    rm -rf "$PROJECT_ROOT/gnome-shell-extensions"
     git clone https://gitlab.gnome.org/GNOME/gnome-shell-extensions.git
     cd gnome-shell-extensions
 
@@ -130,6 +132,7 @@ install_extensions() {
 # ============================================================
 install_themes() {
     echo "Installing Orchis dark compact theme..."
+    rm -rf "$PROJECT_ROOT/Orchis-theme"
     git clone https://github.com/vinceliuice/Orchis-theme.git
     cd Orchis-theme
     ./install.sh --color dark
@@ -266,6 +269,7 @@ set_wallpaper() {
 # ============================================================
 install_grub_theme() {
     echo "Installing GRUB theme..."
+    rm -rf "$PROJECT_ROOT/grub2-themes"
     git clone https://github.com/vinceliuice/grub2-themes.git
     sudo grub2-themes/install.sh -t vimix -c 1920x1080 -i white
     rm -rf grub2-themes
